@@ -14,13 +14,16 @@ function handleQuery() {
 		return;
 	}
 	for (var i = 0; i < searchPath.length; i++) {
-		console.log(searchPath[i]);
+//		console.log(searchPath[i]);
 		var queryParam = searchPath[i].split("=");
 		if (queryParam[0] === "sourceimg") {
 			loadSourceImage(decodeURIComponent(queryParam[1]));
 			return;
 		} else if (queryParam[1] === "keyword") {
 			//searchKeyword(decodeURIComponent(queryParam[2]));
+		} else if (queryParam[0] === "repeatphrase") {
+			loadRepeatPhrase(decodeURIComponent(queryParam[1]));
+			return;
 		}
 	}
 }
@@ -29,6 +32,14 @@ function loadSourceImage(path) {
 	sourceContainer.style.backgroundImage = "url(" + path + ")";
 	sourceContainer.style.width = alotOverlay.width + "px";
 	sourceContainer.style.height = alotOverlay.height + "px";
+}
+
+function loadRepeatPhrase(phrase) {
+	var joinedPhrase = phrase + " ";
+	sourceContainer.style.width = alotOverlay.width + "px";
+	sourceContainer.style.height = alotOverlay.height + "px";
+	sourceContainer.textContent = new Array(1000).join(joinedPhrase);
+	sourceContainer.style.overflow = "hidden";
 }
 
 function redirectToHome() {
